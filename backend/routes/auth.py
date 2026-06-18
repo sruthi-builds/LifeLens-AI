@@ -12,7 +12,6 @@ from utils.jwt_handler import (
 
 router = APIRouter()
 
-
 @router.post("/register")
 def register(user: UserRegister):
 
@@ -80,10 +79,7 @@ def login(user: UserLogin):
 
 @router.get("/me")
 def get_current_user(
-    authorization: str = Header(
-        default=None,
-        alias="Authorization"
-    )
+    authorization: str = Header(None)
 ):
 
     if not authorization:
