@@ -1,11 +1,14 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Header
 from sqlalchemy.orm import Session
 
 from schemas.auth import UserRegister, UserLogin
 from database.connection import SessionLocal
 from database.models import User
 from utils.security import hash_password, verify_password
-from utils.jwt_handler import create_access_token
+from utils.jwt_handler import (
+    create_access_token,
+    verify_token
+)
 
 router = APIRouter()
 
@@ -73,4 +76,38 @@ def login(user: UserLogin):
     return {
         "access_token": token,
         "token_type": "bearer"
+    }
+
+@router.get("/me")
+def get_current_user(
+    authorization: str = Header(
+        default=None,
+        alias="Authorization"
+    )
+):
+
+    if not authorization:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Authorization header missing"
+        )
+
+    token = authorization.replace(
+        "Bearer ",
+        ""
+    )
+
+    payload = verify_token(token)
+
+    if not payload:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token"
+        )
+
+    return {
+        "user_id": payload["user_id"],
+        "email": payload["email"]
     }
