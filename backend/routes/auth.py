@@ -5,6 +5,7 @@ from schemas.auth import UserRegister, UserLogin
 from database.connection import SessionLocal
 from database.models import User
 from utils.security import hash_password, verify_password
+from utils.jwt_handler import create_access_token
 
 router = APIRouter()
 
@@ -62,6 +63,14 @@ def login(user: UserLogin):
             detail="Invalid email or password"
         )
 
+    token = create_access_token(
+        data={
+            "email": existing_user.email,
+            "user_id": existing_user.id
+        }
+    )
+
     return {
-        "message": "Login successful"
+        "access_token": token,
+        "token_type": "bearer"
     }
