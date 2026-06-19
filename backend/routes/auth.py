@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from schemas.auth import UserRegister, UserLogin
 from database.connection import SessionLocal
-from database.models import User
+from database.models import User, Profile
 from utils.security import hash_password, verify_password
 from utils.jwt_handler import (
     create_access_token,
@@ -27,7 +27,9 @@ def register(user: UserRegister):
             detail="Email already registered"
         )
 
-    hashed_password = hash_password(user.password)
+    hashed_password = hash_password(
+        user.password
+    )
 
     new_user = User(
         email=user.email,
@@ -35,6 +37,25 @@ def register(user: UserRegister):
     )
 
     db.add(new_user)
+
+    db.commit()
+
+    db.refresh(new_user)
+
+    new_profile = Profile(
+        user_id=new_user.id,
+
+        full_name=user.full_name,
+
+        date_of_birth=user.date_of_birth,
+
+        location=user.location,
+
+        user_type=user.user_type
+    )
+
+    db.add(new_profile)
+
     db.commit()
 
     return {
