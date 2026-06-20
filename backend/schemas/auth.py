@@ -21,5 +21,20 @@ class UserRegister(BaseModel):
 
 
 class UserLogin(BaseModel):
+
     email: str
+
     password: str
+
+
+class ProfileUpdate(BaseModel):
+
+    full_name: str
+
+    country: str
+
+    state: str
+
+    city: str
+
+    user_type: str

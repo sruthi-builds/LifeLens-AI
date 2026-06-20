@@ -1,7 +1,11 @@
 from fastapi import APIRouter, HTTPException, Header
 from sqlalchemy.orm import Session
 
-from schemas.auth import UserRegister, UserLogin
+from schemas.auth import (
+    UserRegister,
+    UserLogin,
+    ProfileUpdate
+)
 from database.connection import SessionLocal
 from database.models import User, Profile
 from utils.security import hash_password, verify_password
@@ -205,4 +209,51 @@ def get_profile(
         "city": profile.city,
 
         "user_type": profile.user_type
+    }
+
+@router.put("/profile")
+def update_profile(
+
+    profile_data: ProfileUpdate,
+
+    authorization: str = Header(None)
+
+):
+
+    payload = extract_user_from_token(
+        authorization
+    )
+
+    db: Session = SessionLocal()
+
+    profile = db.query(Profile).filter(
+
+        Profile.user_id == payload["user_id"]
+
+    ).first()
+
+    if not profile:
+
+        raise HTTPException(
+
+            status_code=404,
+
+            detail="Profile not found"
+        )
+
+    profile.full_name = profile_data.full_name
+
+    profile.country = profile_data.country
+
+    profile.state = profile_data.state
+
+    profile.city = profile_data.city
+
+    profile.user_type = profile_data.user_type
+
+    db.commit()
+
+    return {
+
+        "message": "Profile updated successfully"
     }
