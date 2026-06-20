@@ -1,0 +1,40 @@
+from pydantic import BaseModel
+
+
+class UserRegister(BaseModel):
+
+    email: str
+
+    password: str
+
+    full_name: str
+
+    date_of_birth: str
+
+    country: str
+
+    state: str
+
+    city: str
+
+    user_type: str
+
+
+class UserLogin(BaseModel):
+
+    email: str
+
+    password: str
+
+
+class ProfileUpdate(BaseModel):
+
+    full_name: str
+
+    country: str
+
+    state: str
+
+    city: str
+
+    user_type: str
