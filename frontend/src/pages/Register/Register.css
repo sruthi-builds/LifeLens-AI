@@ -1,0 +1,303 @@
+.register-page {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 24px;
+  background: radial-gradient(120% 90% at 50% 0%, #0c2233 0%, #081421 50%, #060d17 100%);
+  overflow: hidden;
+}
+
+.register-bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.register-bg-glow--1 {
+  width: 420px;
+  height: 420px;
+  top: -100px;
+  left: -80px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.18), transparent 70%);
+}
+
+.register-bg-glow--2 {
+  width: 460px;
+  height: 460px;
+  bottom: -140px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.16), transparent 70%);
+}
+
+.register-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 920px;
+  padding: 44px 52px 48px;
+}
+
+.register-card::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(94, 234, 212, 0.3), transparent 70%);
+  filter: blur(22px);
+  pointer-events: none;
+}
+
+.register-card__header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.brand--center {
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.register-card__header .card-title {
+  font-size: 1.65rem;
+}
+
+.register-card__header .card-subtitle {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------- */
+/* Form layout                                                       */
+/* ---------------------------------------------------------------- */
+.register-form {
+  margin-top: 8px;
+}
+
+.form-row {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-row--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-row--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.field-error {
+  color: #fb7185;
+  font-size: 0.8rem;
+  margin: -6px 0 16px;
+}
+
+.date-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-field .input-field {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.date-field svg {
+  position: absolute;
+  right: 16px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Who are you today                                                 */
+/* ---------------------------------------------------------------- */
+.who-are-you {
+  margin-top: 4px;
+  margin-bottom: 16px;
+}
+
+.who-are-you__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.who-are-you__subtitle {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+}
+
+.user-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.user-type-card {
+  position: relative;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px 18px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base),
+    background var(--transition-base), transform var(--transition-fast);
+}
+
+.user-type-card:hover {
+  border-color: rgba(94, 234, 212, 0.35);
+  transform: translateY(-2px);
+}
+
+.user-type-card--selected {
+  background: rgba(45, 212, 191, 0.06);
+  border-color: var(--color-glass-border-strong);
+  box-shadow: var(--shadow-glow-teal);
+}
+
+.user-type-card__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.user-type-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(94, 234, 212, 0.12);
+  color: var(--color-teal-bright);
+  flex-shrink: 0;
+}
+
+.user-type-card__title {
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+.user-type-card__badge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-teal-bright);
+}
+
+.user-type-card__desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.user-type-card__best {
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.user-type-card__best span {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
+}
+
+.user-type-card__best ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-type-card__best li {
+  font-size: 0.76rem;
+  color: var(--color-text-secondary);
+  padding-left: 12px;
+  position: relative;
+}
+
+.user-type-card__best li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-teal-bright);
+}
+
+/* ---------------------------------------------------------------- */
+/* Submit + footer                                                   */
+/* ---------------------------------------------------------------- */
+.register-submit {
+  margin-bottom: 16px;
+}
+
+.signin-row {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--color-text-secondary);
+}
+
+.signin-link {
+  display: inline;
+  color: var(--color-teal-bright);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.signin-link:hover {
+  color: var(--color-teal);
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------- */
+/* Responsive                                                        */
+/* ---------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .register-card {
+    padding: 36px 28px 40px;
+  }
+
+  .form-row--4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .user-type-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .register-page {
+    padding: 32px 14px;
+  }
+
+  .register-card {
+    padding: 28px 18px 32px;
+  }
+
+  .form-row--2,
+  .form-row--4 {
+    grid-template-columns: 1fr;
+  }
+}
