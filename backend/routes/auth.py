@@ -12,6 +12,7 @@ from utils.jwt_handler import (
 
 router = APIRouter()
 
+
 @router.post("/register")
 def register(user: UserRegister):
 
@@ -22,6 +23,7 @@ def register(user: UserRegister):
     ).first()
 
     if existing_user:
+
         raise HTTPException(
             status_code=400,
             detail="Email already registered"
@@ -43,13 +45,18 @@ def register(user: UserRegister):
     db.refresh(new_user)
 
     new_profile = Profile(
+
         user_id=new_user.id,
 
         full_name=user.full_name,
 
         date_of_birth=user.date_of_birth,
 
-        location=user.location,
+        country=user.country,
+
+        state=user.state,
+
+        city=user.city,
 
         user_type=user.user_type
     )
@@ -62,6 +69,7 @@ def register(user: UserRegister):
         "message": "User registered successfully"
     }
 
+
 @router.post("/login")
 def login(user: UserLogin):
 
@@ -72,6 +80,7 @@ def login(user: UserLogin):
     ).first()
 
     if not existing_user:
+
         raise HTTPException(
             status_code=401,
             detail="Invalid email or password"
@@ -81,6 +90,7 @@ def login(user: UserLogin):
         user.password,
         existing_user.password_hash
     ):
+
         raise HTTPException(
             status_code=401,
             detail="Invalid email or password"
@@ -97,6 +107,33 @@ def login(user: UserLogin):
         "access_token": token,
         "token_type": "bearer"
     }
+
+def extract_user_from_token(
+    authorization: str
+):
+
+    if not authorization:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Authorization header missing"
+        )
+
+    token = authorization.replace(
+        "Bearer ",
+        ""
+    )
+
+    payload = verify_token(token)
+
+    if not payload:
+
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token"
+        )
+
+    return payload
 
 @router.get("/me")
 def get_current_user(
@@ -127,4 +164,45 @@ def get_current_user(
     return {
         "user_id": payload["user_id"],
         "email": payload["email"]
+    }
+
+@router.get("/profile")
+def get_profile(
+    authorization: str = Header(None)
+):
+
+    payload = extract_user_from_token(
+        authorization
+    )
+
+    db: Session = SessionLocal()
+
+    profile = db.query(Profile).filter(
+
+        Profile.user_id == payload["user_id"]
+
+    ).first()
+
+    if not profile:
+
+        raise HTTPException(
+
+            status_code=404,
+
+            detail="Profile not found"
+        )
+
+    return {
+
+        "full_name": profile.full_name,
+
+        "date_of_birth": profile.date_of_birth,
+
+        "country": profile.country,
+
+        "state": profile.state,
+
+        "city": profile.city,
+
+        "user_type": profile.user_type
     }

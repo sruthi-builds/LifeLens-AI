@@ -11,7 +11,11 @@ class UserRegister(BaseModel):
 
     date_of_birth: str
 
-    location: str
+    country: str
+
+    state: str
+
+    city: str
 
     user_type: str
 

@@ -54,9 +54,19 @@ class Profile(Base):
         nullable=False
     )
 
-    location = Column(
-        String,
-        nullable=False
+    country = Column(
+    String,
+    nullable=False
+    )
+
+    state = Column(
+    String,
+    nullable=False
+    )
+
+    city = Column(
+    String,
+    nullable=False
     )
 
     user_type = Column(
