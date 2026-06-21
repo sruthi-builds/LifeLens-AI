@@ -73,3 +73,155 @@ class Profile(Base):
         String,
         nullable=False
     )
+
+class StudentProfile(Base):
+
+    __tablename__ = "student_profiles"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+        unique=True
+    )
+
+    education_level = Column(
+        String,
+        nullable=False
+    )
+
+    field_of_study = Column(
+        String,
+        nullable=False
+    )
+
+    current_year = Column(
+        String,
+        nullable=False
+    )
+
+    skills = Column(
+        String,
+        nullable=False
+    )
+
+    interests = Column(
+        String,
+        nullable=False
+    )
+
+    career_goal = Column(
+        String,
+        nullable=False
+    )
+
+
+class JobSeekerProfile(Base):
+
+    __tablename__ = "jobseeker_profiles"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+        unique=True
+    )
+
+    qualification = Column(
+        String,
+        nullable=False
+    )
+
+    experience = Column(
+        String,
+        nullable=False
+    )
+
+    target_role = Column(
+        String,
+        nullable=False
+    )
+
+
+class WorkingProfile(Base):
+
+    __tablename__ = "working_profiles"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+        unique=True
+    )
+
+    job_title = Column(
+        String,
+        nullable=False
+    )
+
+    organization = Column(
+        String,
+        nullable=False
+    )
+
+    experience = Column(
+        String,
+        nullable=False
+    )
+
+    skills = Column(
+        String,
+        nullable=False
+    )
+
+    career_goal = Column(
+        String,
+        nullable=False
+    )
+
+
+class SeniorProfile(Base):
+
+    __tablename__ = "senior_profiles"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    user_id = Column(
+        Integer,
+        ForeignKey("users.id"),
+        unique=True
+    )
+
+    medicine_reminders = Column(
+        String,
+        nullable=False
+    )
+
+    emergency_contacts = Column(
+        String,
+        nullable=False
+    )
+
+    medical_reports = Column(
+        String,
+        nullable=False
+    )
