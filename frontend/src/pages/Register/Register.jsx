@@ -32,16 +32,31 @@ const USER_TYPES = [
     bestFor: ['Graduates', 'Professionals', 'Career Switchers'],
   },
   {
+  value: 'working_professional',
+  label: 'Working Professional',
+  icon: <BriefcaseIcon />,
+  description: 'Advance your career through certifications, promotions, government benefits and upskilling opportunities.',
+  bestFor: [
+    'Full-Time Employees',
+    'Corporate Professionals',
+    'Government Employees'
+  ],
+},
+
+  {
     value: 'senior_citizen',
     label: 'Senior Citizen',
     icon: <HeartIcon />,
     description: 'Access government schemes, healthcare reminders and support services.',
     bestFor: ['Retired Individuals', 'Senior Citizens', 'Caregivers'],
   },
+
 ];
 
-export default function Register({ onSwitchToLogin }) {
-  // Controlled form state — keys mirror the backend register request contract exactly.
+export default function Register({
+  onSwitchToLogin,
+  onContinue,
+}) {  // Controlled form state — keys mirror the backend register request contract exactly.
   const [formData, setFormData] = useState({
     full_name: '',
     email: '',
@@ -81,7 +96,13 @@ export default function Register({ onSwitchToLogin }) {
     // TODO: wire up to POST /register once the backend is ready.
     // Send everything except confirm_password, which is client-side only.
     const { confirm_password, ...registerPayload } = formData;
-    console.log('Register submit payload:', registerPayload);
+
+console.log('Register submit payload:', registerPayload);
+
+// Temporary hackathon navigation
+if (onContinue) {
+  onContinue(formData.user_type);
+}
   };
 
   return (

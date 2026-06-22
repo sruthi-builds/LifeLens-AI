@@ -1,0 +1,87 @@
+/* SeniorCitizenProfile.css
+   Profile-specific overrides for the Senior Citizen form.
+   Shared page-shell styles live in ../ProfileShared.css.
+   ──────────────────────────────────────────────────────────────── */
+
+/* Narrower card — only 3 fields */
+.profile-page .profile-shell {
+  max-width: 640px;
+}
+
+/* Warm rose-tinted icon badge for this profile */
+.sc-icon-badge {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.14), rgba(45, 212, 191, 0.12));
+  border-color: rgba(251, 113, 133, 0.2);
+  color: #fda4af;
+}
+
+/* Feature preview cards */
+.sc-feature-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.sc-feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.sc-feature-card:hover {
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(94, 234, 212, 0.2);
+}
+
+.sc-feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: rgba(251, 113, 133, 0.12);
+  color: #fda4af;
+  font-size: 1.1rem;
+}
+
+.sc-feature-icon--blue {
+  background: rgba(59, 130, 246, 0.12);
+  color: var(--color-blue);
+}
+
+.sc-feature-icon--teal {
+  background: rgba(45, 212, 191, 0.12);
+  color: var(--color-teal-bright);
+}
+
+.sc-feature-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  line-height: 1.3;
+}
+
+/* Emergency contact hint */
+.sc-contact-hint {
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .sc-feature-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sc-feature-row > :last-child {
+    grid-column: span 2;
+  }
+}

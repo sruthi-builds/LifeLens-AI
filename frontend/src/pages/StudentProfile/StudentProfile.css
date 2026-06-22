@@ -1,0 +1,25 @@
+/* StudentProfile.css
+   Profile-specific layout adjustments for the Student profile form.
+   All shared page-shell styles are in ../ProfileShared.css.
+   ──────────────────────────────────────────────────────────────── */
+
+/* Current Year field is narrower so it doesn't stretch full-width alone */
+.sp-year-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Tighter gap between the chip sections */
+.profile-form .chip-input-wrap + .chip-input-wrap {
+  margin-top: 4px;
+}
+
+/* Accent line under the card header for this profile type */
+.profile-card__icon-badge {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.2), rgba(59, 130, 246, 0.14));
+}
+
+@media (max-width: 760px) {
+  .sp-year-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,20 @@
+/* WorkingProfile.css
+   Profile-specific overrides for the Working Professional form.
+   Shared page-shell styles live in ../ProfileShared.css.
+   ──────────────────────────────────────────────────────────────── */
+
+/* Experience select takes half the width */
+.wp-exp-row {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Blue-shifted icon badge for the working profile */
+.wp-icon-badge {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(45, 212, 191, 0.12));
+}
+
+@media (max-width: 760px) {
+  .wp-exp-row {
+    grid-template-columns: 1fr;
+  }
+}

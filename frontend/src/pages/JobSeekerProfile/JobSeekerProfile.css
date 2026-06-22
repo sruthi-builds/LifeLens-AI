@@ -1,0 +1,56 @@
+/* JobSeekerProfile.css
+   Profile-specific overrides for the Job Seeker form.
+   Shared page-shell styles live in ../ProfileShared.css.
+   ──────────────────────────────────────────────────────────────── */
+
+/* Narrower card for the 3-field form — more focused feel */
+.profile-page .profile-shell {
+  max-width: 640px;
+}
+
+/* Teal→blue icon badge for the Job Seeker profile */
+.js-icon-badge {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(45, 212, 191, 0.16));
+}
+
+/* Feature highlight card */
+.js-highlight-card {
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(45, 212, 191, 0.06));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 1px; /* acts as gradient border frame */
+}
+
+.js-highlight-card__inner {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  border-radius: calc(var(--radius-lg) - 1px);
+  background: rgba(255, 255, 255, 0.018);
+}
+
+.js-highlight-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(45, 212, 191, 0.14));
+  color: var(--color-teal-bright);
+}
+
+.js-highlight-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--color-text-primary);
+}
+
+.js-highlight-body {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
