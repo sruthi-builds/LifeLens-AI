@@ -1,3 +1,6 @@
+import random
+
+import string
 from fastapi import APIRouter, HTTPException, Header
 from sqlalchemy.orm import Session
 
@@ -256,4 +259,67 @@ def update_profile(
     return {
 
         "message": "Profile updated successfully"
+    }
+
+@router.post("/forgot-password")
+def forgot_password(
+
+    email: str
+
+):
+
+    db: Session = SessionLocal()
+
+    user = db.query(
+
+        User
+
+    ).filter(
+
+        User.email == email
+
+    ).first()
+
+    if not user:
+
+        return {
+
+            "message":
+
+            "User not found"
+
+        }
+
+    temp_password = "".join(
+
+        random.choices(
+
+            string.ascii_letters +
+
+            string.digits,
+
+            k=8
+
+        )
+
+    )
+
+    user.password_hash = hash_password(
+
+        temp_password
+
+    )
+
+    db.commit()
+
+    return {
+
+        "message":
+
+        "Temporary password generated",
+
+        "temporary_password":
+
+        temp_password
+
     }

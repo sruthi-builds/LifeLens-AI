@@ -225,3 +225,150 @@ class SeniorProfile(Base):
         String,
         nullable=False
     )
+
+class PlannerTask(Base):
+
+    __tablename__ = "planner_tasks"
+
+    id = Column(
+
+        Integer,
+
+        primary_key=True,
+
+        index=True
+    )
+
+    user_id = Column(
+
+        Integer,
+
+        ForeignKey("users.id")
+    )
+
+    title = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    description = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    due_date = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    status = Column(
+
+        String,
+
+        nullable=False,
+
+        default="pending"
+    )
+
+class Opportunity(Base):
+
+    __tablename__ = "opportunities"
+
+    id = Column(
+
+        Integer,
+
+        primary_key=True,
+
+        index=True
+    )
+
+    title = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    category = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    description = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    age_min = Column(
+
+        Integer,
+
+        nullable=True
+    )
+
+    age_max = Column(
+
+        Integer,
+
+        nullable=True
+    )
+
+    education_required = Column(
+
+        String,
+
+        nullable=True
+    )
+
+    documents_required = Column(
+
+        String,
+
+        nullable=True
+    )
+
+    benefits = Column(
+
+        String,
+
+        nullable=True
+    )
+
+    application_start = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    application_end = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    official_link = Column(
+
+        String,
+
+        nullable=False
+    )
+
+    target_user_type = Column(
+
+        String,
+
+        nullable=False
+    )
