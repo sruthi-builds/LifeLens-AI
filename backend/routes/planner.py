@@ -1,14 +1,14 @@
 from fastapi import APIRouter
 from fastapi import HTTPException
-from fastapi import Header
+from fastapi import Depends
+
+from utils.auth_dependency import get_current_user
 
 from sqlalchemy.orm import Session
 
 from database.connection import SessionLocal
 
 from database.models import PlannerTask
-
-from routes.auth import extract_user_from_token
 
 from schemas.planner import (
     PlannerTaskCreate,
@@ -24,13 +24,10 @@ def create_task(
 
     task: PlannerTaskCreate,
 
-    authorization: str = Header(None)
+    payload = Depends(get_current_user)
 
 ):
 
-    payload = extract_user_from_token(
-        authorization
-    )
 
     db: Session = SessionLocal()
 
@@ -60,13 +57,9 @@ def create_task(
 @router.get("/tasks")
 def get_tasks(
 
-    authorization: str = Header(None)
+    payload = Depends(get_current_user)
 
 ):
-
-    payload = extract_user_from_token(
-        authorization
-    )
 
     db: Session = SessionLocal()
 
@@ -112,13 +105,9 @@ def update_task(
 
     task: PlannerTaskUpdate,
 
-    authorization: str = Header(None)
+    payload = Depends(get_current_user)
 
 ):
-
-    payload = extract_user_from_token(
-        authorization
-    )
 
     db: Session = SessionLocal()
 
@@ -173,13 +162,9 @@ def delete_task(
 
     task_id: int,
 
-    authorization: str = Header(None)
+    payload = Depends(get_current_user)
 
 ):
-
-    payload = extract_user_from_token(
-        authorization
-    )
 
     db: Session = SessionLocal()
 

@@ -1,5 +1,7 @@
 from fastapi import APIRouter
-from fastapi import Header
+from fastapi import Depends
+
+from utils.auth_dependency import get_current_user
 
 from sqlalchemy.orm import Session
 
@@ -9,8 +11,6 @@ from database.models import Opportunity
 from database.models import Profile
 
 from schemas.opportunity import OpportunityCreate
-
-from routes.auth import extract_user_from_token
 
 
 router = APIRouter()
@@ -100,15 +100,9 @@ def get_all_opportunities():
 @router.get("/recommended")
 def get_recommended(
 
-    authorization: str = Header(None)
+    payload = Depends(get_current_user)
 
 ):
-
-    payload = extract_user_from_token(
-
-        authorization
-
-    )
 
     db: Session = SessionLocal()
 
